@@ -63,9 +63,21 @@ export const NewRecipeName = styled.form`
 export const NewRecipeSelect = styled.div`
   max-width: 100%;
 `
+
+// blue: used by both the left submit and right submit
 export const NewRecipeSubmit = styled.button`
   max-width: 100%;
   background-color: green;
+  border: 1px solid black;
+  cursor: pointer;
+  &:hover {
+    background-color: #99AEAD
+  }
+`
+export const MatchingRecipe = styled.a`
+  display: flex;
+  align-items: center;
+  background-color: #F0F0F0;
   border: 1px solid black;
   cursor: pointer;
   &:hover {

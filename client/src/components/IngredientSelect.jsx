@@ -3,6 +3,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import axios from 'axios';
 import { RecipeGrid, TitleLayout, SectionGrid, SectionTitleLayout, IngredientListGrid, TagLayout, NewRecipeSubmit } from './page.styled.js'
+import Tag from './Tag.jsx';
 
 const proteinOptions = [
   { value: 'beef', label: '🐄 Beef' },
@@ -40,10 +41,43 @@ export default function IngredientSelect() {
   const [protein, setProtein] = useState([]);
   const [vegetable, setVegetable] = useState([]);
   const [carb, setCarb] = useState([]);
+  const [matchingRecipe, setMatchingRecipe] = useState([]);
 
+  // when click, will do a get request
   const handleSubmit = () => {
-    
-      console.log('matching found!', )
+    const options = [];
+    // change array of obj to array of string
+    // right now protein looks like [{value: xxx, label: xxxx}]
+    for (let i = 0; i < protein.length; i++) {
+      options.push(protein[i].value)
+      console.log('protein')
+    }
+    for (let i = 0; i < vegetable.length; i++) {
+      options.push(vegetable[i].value)
+    }
+    for (let i = 0; i < carb.length; i++) {
+      options.push(carb[i].value)
+    }
+
+    // now I have an array options that contains all the client input ingredients
+
+    axios.get('/lazydish')
+      .then((response) => {
+        // response.data looks like [{id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}]
+        const recipeArray = response.data;
+        console.log('recipeArray is: ', recipeArray)
+        const possibleRecipe = []
+        for (let i = 0; i < recipeArray.length; i++) {
+          // for each database recipe, check if all its ingredients are include in the client input array
+          // client ingredient options is the bigger array, we check recipe ingredients array in there
+          if(recipeArray[i].ingredients.every(r => options.indexOf(r) >= 0)) {
+            possibleRecipe.push(recipeArray[i]);
+          }
+        }
+        console.log('found matching recipe: ', possibleRecipe);
+        setMatchingRecipe(possibleRecipe);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -62,7 +96,7 @@ export default function IngredientSelect() {
           onChange={setProtein}
           isSearchable
           autoFocus
-        />
+          />
       </SectionGrid>
       <SectionGrid>
         <TitleLayout>Select vegetables you have~</TitleLayout>
@@ -75,7 +109,7 @@ export default function IngredientSelect() {
           onChange={setVegetable}
           isSearchable
           autoFocus
-        />
+          />
       </SectionGrid>
 
       <SectionGrid>
@@ -91,10 +125,15 @@ export default function IngredientSelect() {
           autoFocus
         />
       </SectionGrid>
-      <NewRecipeSubmit onClick={() => handleSubmit()}>Submit this recipe~</NewRecipeSubmit>
+      <NewRecipeSubmit onClick={() => handleSubmit()}>Submit your ingredients~</NewRecipeSubmit>
       <SectionGrid>
         <TitleLayout>Matching recipes:</TitleLayout>
-        <div>some recipes</div>
+          {matchingRecipe.length > 0 ? matchingRecipe.map((recipe, index) => {
+            // console.log('I am in map funciton', recipe);
+            return <Tag key={recipe.url + index} recipe={recipe}/>
+          }) : null
+
+          }
       </SectionGrid>
     </RecipeGrid>
   )

@@ -19,8 +19,10 @@ app.post('/lazydish', (req, res) => {
       res.status(200).send('recipe added')
     }
   })
-
 });
+
+app.get('/lazydish', controller.getAll
+);
 
 
 app.listen(PORT, () => {

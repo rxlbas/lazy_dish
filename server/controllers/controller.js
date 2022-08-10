@@ -10,3 +10,9 @@ exports.addRecipe = (body, cb) => {
     }
   })
 };
+
+exports.getAll = (req, res) => {
+  lazydish.find({}).exec()
+  .then((result) => res.status(200).send(result))
+  .catch((error) => res.status(400).send(error))
+}
