@@ -36,7 +36,7 @@ const carbOptions = [
   { value: 'corn', label: '🌽 Corn' }
 ]
 
-export default function IngredientSelect() {
+export default function IngredientSelect({ recipeArray }) {
 
   const [protein, setProtein] = useState([]);
   const [vegetable, setVegetable] = useState([]);
@@ -61,29 +61,40 @@ export default function IngredientSelect() {
 
     // now I have an array options that contains all the client input ingredients
 
-    axios.get('/lazydish')
-      .then((response) => {
-        // response.data looks like [{id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}]
-        const recipeArray = response.data;
-        console.log('recipeArray is: ', recipeArray)
-        const possibleRecipe = []
-        for (let i = 0; i < recipeArray.length; i++) {
-          // for each database recipe, check if all its ingredients are include in the client input array
-          // client ingredient options is the bigger array, we check recipe ingredients array in there
-          if(recipeArray[i].ingredients.every(r => options.indexOf(r) >= 0)) {
-            possibleRecipe.push(recipeArray[i]);
-          }
-        }
-        console.log('found matching recipe: ', possibleRecipe);
-        setMatchingRecipe(possibleRecipe);
-      })
-      .catch((err) => console.log(err));
+    // axios.get('/lazydish')
+    //   .then((response) => {
+    //     // response.data looks like [{id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}]
+    //     const recipeArray = response.data;
+    //     console.log('recipeArray is: ', recipeArray)
+    //     const possibleRecipe = []
+    //     for (let i = 0; i < recipeArray.length; i++) {
+    //       // for each database recipe, check if all its ingredients are include in the client input array
+    //       // client ingredient options is the bigger array, we check recipe ingredients array in there
+    //       if(recipeArray[i].ingredients.every(r => options.indexOf(r) >= 0)) {
+    //         possibleRecipe.push(recipeArray[i]);
+    //       }
+    //     }
+    //     console.log('found matching recipe: ', possibleRecipe);
+    //     setMatchingRecipe(possibleRecipe);
+    //   })
+    //   .catch((err) => console.log(err));
+
+    const possibleRecipe = []
+    for (let i = 0; i < recipeArray.length; i++) {
+      // for each database recipe, check if all its ingredients are include in the client input array
+      // client ingredient options is the bigger array, we check recipe ingredients array in there
+      if (recipeArray[i].ingredients.every(r => options.indexOf(r) >= 0)) {
+        possibleRecipe.push(recipeArray[i]);
+      }
+    }
+    console.log('found matching recipe: ', possibleRecipe);
+    setMatchingRecipe(possibleRecipe);
   }
 
   return (
     <RecipeGrid>
       <SectionTitle>
-      👩‍🍳 Welcome to Lazy Dish! Please pick the ingredients you have~👨‍🍳
+        👩‍🍳 Welcome to Lazy Dish! Please pick the ingredients you have~👨‍🍳
       </SectionTitle>
       <SectionGrid>
         <SmallSectionTitle>Select proteins you have~</SmallSectionTitle>
@@ -96,7 +107,7 @@ export default function IngredientSelect() {
           onChange={setProtein}
           isSearchable
           autoFocus
-          />
+        />
       </SectionGrid>
       <SectionGrid>
         <SmallSectionTitle>Select vegetables you have~</SmallSectionTitle>
@@ -109,7 +120,7 @@ export default function IngredientSelect() {
           onChange={setVegetable}
           isSearchable
           autoFocus
-          />
+        />
       </SectionGrid>
 
       <SectionGrid>
@@ -128,12 +139,11 @@ export default function IngredientSelect() {
       <NewRecipeSubmit onClick={() => handleSubmit()}>Submit your ingredients~</NewRecipeSubmit>
       <SectionGrid>
         <SmallSectionTitle>Matching recipes:</SmallSectionTitle>
-          {matchingRecipe.length > 0 ? matchingRecipe.map((recipe, index) => {
-            // console.log('I am in map funciton', recipe);
-            return <Tag key={recipe.url + index} recipe={recipe}/>
-          }) : null
-
-          }
+        {matchingRecipe.length > 0 ? matchingRecipe.map((recipe, index) => {
+          // console.log('I am in map funciton', recipe);
+          return <Tag key={recipe.url + index} recipe={recipe} />
+        }) : <div>I don't see any matching recipe yet, consider adding more ingredients you have or consider go on a grocery shopping trip? 🛒 </div>
+        }
       </SectionGrid>
     </RecipeGrid>
   )

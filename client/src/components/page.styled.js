@@ -1,6 +1,41 @@
 import styled from 'styled-components';
 
-export const PageGrid = styled.div`
+export const WholeGrid = styled.div`
+  display: grid;
+  width: 90vw;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-rows: auto auto;
+  gap: 2%;
+`
+export const PageTopGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-rows: auto auto auto;
+  gap: 2%;
+`
+export const PageTitle = styled.h1`
+  padding-top: 3%;
+  margin: 0 auto;
+`
+export const PageDescription = styled.h3`
+  margin: 0 auto;
+`
+export const PageButtonGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto auto;
+  gap: 5%;
+`
+export const PageButton = styled.button`
+  max-width: 50%;
+  margin: 0 auto;
+`
+
+
+export const Page1Grid = styled.div`
   display: grid;
   width: 90vw;
   max-width: 100%;
@@ -19,7 +54,7 @@ export const RecipeGrid = styled.div`
   gap: 2%;
 `
 // blue
-export const SectionTitle = styled.h1`
+export const SectionTitle = styled.h2`
   max-width: 100%;
 `
 // blue
@@ -55,7 +90,7 @@ display: grid;
   gap: 2%;
 `
 // blue
-export const NewRecipeTitle = styled.h1`
+export const NewRecipeTitle = styled.h2`
   max-width: 100%;
 `
 export const NewRecipeName = styled.form`
