@@ -16,9 +16,10 @@ export const RecipeGrid = styled.div`
   grid-column-start: 1;
   grid-column-end: 2;
   grid-template-rows: auto auto auto auto auto;
+  gap: 2%;
 `
 // blue
-export const TitleLayout = styled.div`
+export const SectionTitle = styled.h1`
   max-width: 100%;
 `
 // blue
@@ -28,7 +29,8 @@ export const SectionGrid = styled.div`
   grid-template-rows: auto auto;
 `
 // orange
-export const SectionTitleLayout = styled.div`
+// used by both IngredientSelect and NewRecipe
+export const SmallSectionTitle = styled.div`
   max-width: 100%;
 `
 // orange
@@ -49,10 +51,11 @@ display: grid;
   max-width: 100%;
   grid-column-start: auto;
   grid-column-end: auto;
-  grid-template-rows: auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
+  gap: 2%;
 `
 // blue
-export const NewRecipeTitle = styled.div`
+export const NewRecipeTitle = styled.h1`
   max-width: 100%;
 `
 export const NewRecipeName = styled.form`
@@ -77,9 +80,13 @@ export const NewRecipeSubmit = styled.button`
 export const MatchingRecipe = styled.a`
   display: flex;
   align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
   background-color: #F0F0F0;
   border: 1px solid black;
   cursor: pointer;
+  text-decoration: none;
   &:hover {
     background-color: #99AEAD
   }

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import axios from 'axios';
-import { RecipeGrid, TitleLayout, SectionGrid, SectionTitleLayout, IngredientListGrid, TagLayout, NewRecipeSubmit } from './page.styled.js'
+import { RecipeGrid, SectionTitle, SectionGrid, SmallSectionTitle, IngredientListGrid, TagLayout, NewRecipeSubmit } from './page.styled.js'
 import Tag from './Tag.jsx';
 
 const proteinOptions = [
@@ -30,7 +30,7 @@ const vegetableOptions = [
 
 const carbOptions = [
   { value: 'rice', label: '🍚 Rice' },
-  { value: 'pasta', label: '🥘 Pasta' },
+  { value: 'pasta', label: '🍝Pasta' },
   { value: 'bread', label: '🍞 Bread' },
   { value: 'potato', label: '🥔 Potato' },
   { value: 'corn', label: '🌽 Corn' }
@@ -82,11 +82,11 @@ export default function IngredientSelect() {
 
   return (
     <RecipeGrid>
-      <TitleLayout>
-        Welcome to Lazy Dish! Please pick the ingredients in your fridge.
-      </TitleLayout>
+      <SectionTitle>
+      👩‍🍳 Welcome to Lazy Dish! Please pick the ingredients you have~👨‍🍳
+      </SectionTitle>
       <SectionGrid>
-        <TitleLayout>Select proteins you have~</TitleLayout>
+        <SmallSectionTitle>Select proteins you have~</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -99,7 +99,7 @@ export default function IngredientSelect() {
           />
       </SectionGrid>
       <SectionGrid>
-        <TitleLayout>Select vegetables you have~</TitleLayout>
+        <SmallSectionTitle>Select vegetables you have~</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -113,7 +113,7 @@ export default function IngredientSelect() {
       </SectionGrid>
 
       <SectionGrid>
-        <TitleLayout>Select carbs you have~</TitleLayout>
+        <SmallSectionTitle>Select carbs you have~</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -127,7 +127,7 @@ export default function IngredientSelect() {
       </SectionGrid>
       <NewRecipeSubmit onClick={() => handleSubmit()}>Submit your ingredients~</NewRecipeSubmit>
       <SectionGrid>
-        <TitleLayout>Matching recipes:</TitleLayout>
+        <SmallSectionTitle>Matching recipes:</SmallSectionTitle>
           {matchingRecipe.length > 0 ? matchingRecipe.map((recipe, index) => {
             // console.log('I am in map funciton', recipe);
             return <Tag key={recipe.url + index} recipe={recipe}/>

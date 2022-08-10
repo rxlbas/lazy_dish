@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import axios from 'axios';
-import { NewRecipeGrid, NewRecipeTitle, NewRecipeName, NewRecipeSelect, NewRecipeSubmit } from './page.styled.js'
+import { NewRecipeGrid, NewRecipeTitle, NewRecipeName, NewRecipeSelect, NewRecipeSubmit, SmallSectionTitle } from './page.styled.js'
 
 const proteinOptions = [
   { value: 'beef', label: '🐄 Beef' },
@@ -29,7 +29,7 @@ const vegetableOptions = [
 
 const carbOptions = [
   { value: 'rice', label: '🍚 Rice' },
-  { value: 'pasta', label: '🥘 Pasta' },
+  { value: 'pasta', label: '🍝 Pasta' },
   { value: 'bread', label: '🍞 Bread' },
   { value: 'potato', label: '🥔 Potato' },
   { value: 'corn', label: '🌽 Corn' }
@@ -68,17 +68,19 @@ export default function NewRecipe() {
       options['url'] = url;
 
       axios.post('/lazydish', options)
-      .then((response) => console.log(response))
+      .then((response) => alert('Recipe Added!'))
       .catch((err) => console.log(err));
     } else {
-      alert('input the dish name & url')
+      alert('Please input the dish name, url & at least one ingredient.')
     }
   }
 
   return (
     <NewRecipeGrid>
       <NewRecipeTitle>
-        Have a recipe you like? Input it below:
+      🍱 🍲🥘🥙🍛🍝
+      <br/>
+      Have a recipe you like? Input it below:
       </NewRecipeTitle>
       <NewRecipeName>
         <label htmlFor="dishName">What's the name of the dish?</label>
@@ -88,6 +90,7 @@ export default function NewRecipe() {
         <label htmlFor="dishName">What's the link to this recipe?</label>
         <input id="dishName" type="text" onChange={() => setUrl(event.target.value)} required />
       </NewRecipeName>
+      <SmallSectionTitle>Select at least one ingredient this recipe includes:</SmallSectionTitle>
       <NewRecipeSelect>
         <Select
           // defaultMenuIsOpen
@@ -101,7 +104,6 @@ export default function NewRecipe() {
         />
       </NewRecipeSelect>
       <NewRecipeSelect>
-
         <Select
           // defaultMenuIsOpen
           isMulti
