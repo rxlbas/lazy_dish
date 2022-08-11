@@ -9,7 +9,7 @@ A full stack app to help people decide what to eat for today base on the ingredi
   Navigate to the root directory and run the following commands in terminal
   ```npm
   npm install
-  npm start
+  npm run start
   ```
 ## Tech-Stack
 ![Mongodb](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -25,6 +25,3 @@ A full stack app to help people decide what to eat for today base on the ingredi
   |GET|/lazydish|200
   |POST|/lazydish|201
 
-## Optimization
-- Create Index for DB to improve query time
-- Using Load Balancer (Least Connection) to increase active Visual Users, decrease error rate and latency.
