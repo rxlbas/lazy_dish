@@ -4,7 +4,6 @@ A full stack app to help people decide what to eat for today base on the ingredi
 1. [Installation](#installation)
 2. [Tech-Stack](#tech-stack)
 3. [Routes](#routes)
-4. [Optimization](#optimization)
 
 ## Installation
   Navigate to the root directory and run the following commands in terminal
