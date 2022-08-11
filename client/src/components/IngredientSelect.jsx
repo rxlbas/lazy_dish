@@ -2,41 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import axios from 'axios';
-import { RecipeGrid, SectionTitle, SectionGrid, SmallSectionTitle, IngredientListGrid, TagLayout, NewRecipeSubmit } from './page.styled.js'
+import { RecipeGrid, SectionTitle, SectionGrid, SmallSectionGrid, SmallSectionTitle, IngredientListGrid, TagLayout, NewRecipeSubmit } from './page.styled.js'
 import Tag from './Tag.jsx';
 
-const proteinOptions = [
-  { value: 'beef', label: '🐄 Beef' },
-  { value: 'pork', label: '🐖 Pork' },
-  { value: 'chicken', label: '🐔 Chicken' },
-  { value: 'egg', label: '🥚 egg' },
-  { value: 'lamb', label: '🐑 Lamb' },
-  { value: 'salmon', label: '🐟 Salmon' },
-  { value: 'tofu', label: '🧈 Tofu' }
-];
 
-const vegetableOptions = [
-  { value: 'asparagus', label: '🥬 Asparagus' },
-  { value: 'bell_pepper', label: '🫑 Bell Pepper' },
-  { value: 'broccoli', label: '🥦  Broccoli' },
-  { value: 'carrot', label: '🥕 Carrot' },
-  { value: 'celery', label: '🥬 Celery' },
-  { value: 'cucumber', label: '🥒  Cucumber' },
-  { value: 'lettuce', label: '🥬 Lettuce' },
-  { value: 'mushroom', label: '🍄 Mushroom' },
-  { value: 'onion', label: '🧅 Onion' },
-  { value: 'tomato', label: '🍅 Tomato' }
-]
-
-const carbOptions = [
-  { value: 'rice', label: '🍚 Rice' },
-  { value: 'pasta', label: '🍝Pasta' },
-  { value: 'bread', label: '🍞 Bread' },
-  { value: 'potato', label: '🥔 Potato' },
-  { value: 'corn', label: '🌽 Corn' }
-]
-
-export default function IngredientSelect({ recipeArray }) {
+export default function IngredientSelect({ proteinOptions, vegetableOptions, carbOptions, recipeArray }) {
 
   const [protein, setProtein] = useState([]);
   const [vegetable, setVegetable] = useState([]);
@@ -94,10 +64,10 @@ export default function IngredientSelect({ recipeArray }) {
   return (
     <RecipeGrid>
       <SectionTitle>
-        👩‍🍳 Welcome to Lazy Dish! Please pick the ingredients you have~👨‍🍳
+        👩‍🍳 Please pick the ingredients you have~👨‍🍳
       </SectionTitle>
       <SectionGrid>
-        <SmallSectionTitle>Select proteins you have~</SmallSectionTitle>
+        <SmallSectionTitle>Select proteins you have (optional)</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -110,7 +80,7 @@ export default function IngredientSelect({ recipeArray }) {
         />
       </SectionGrid>
       <SectionGrid>
-        <SmallSectionTitle>Select vegetables you have~</SmallSectionTitle>
+        <SmallSectionTitle>Select vegetables you have (optional)</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -124,7 +94,7 @@ export default function IngredientSelect({ recipeArray }) {
       </SectionGrid>
 
       <SectionGrid>
-        <SmallSectionTitle>Select carbs you have~</SmallSectionTitle>
+        <SmallSectionTitle>Select carbs you have (optional)</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -139,11 +109,14 @@ export default function IngredientSelect({ recipeArray }) {
       <NewRecipeSubmit onClick={() => handleSubmit()}>Submit your ingredients~</NewRecipeSubmit>
       <SectionGrid>
         <SmallSectionTitle>Matching recipes:</SmallSectionTitle>
+        <br/>
+        <SmallSectionGrid>
         {matchingRecipe.length > 0 ? matchingRecipe.map((recipe, index) => {
           // console.log('I am in map funciton', recipe);
           return <Tag key={recipe.url + index} recipe={recipe} />
         }) : <div>I don't see any matching recipe yet, consider adding more ingredients you have or consider go on a grocery shopping trip? 🛒 </div>
         }
+        </SmallSectionGrid>
       </SectionGrid>
     </RecipeGrid>
   )

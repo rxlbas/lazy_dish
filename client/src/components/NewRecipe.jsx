@@ -4,38 +4,7 @@ import makeAnimated from 'react-select/animated';
 import axios from 'axios';
 import { NewRecipeGrid, NewRecipeTitle, NewRecipeName, NewRecipeSelect, NewRecipeSubmit, SmallSectionTitle } from './page.styled.js'
 
-const proteinOptions = [
-  { value: 'beef', label: '🐄 Beef' },
-  { value: 'pork', label: '🐖 Pork' },
-  { value: 'chicken', label: '🐔 Chicken' },
-  { value: 'egg', label: '🥚 egg' },
-  { value: 'lamb', label: '🐑 Lamb' },
-  { value: 'salmon', label: '🐟 Salmon' },
-  { value: 'tofu', label: '🧈 Tofu' }
-];
-
-const vegetableOptions = [
-  { value: 'asparagus', label: '🥬 Asparagus' },
-  { value: 'bell_pepper', label: '🫑 Bell Pepper' },
-  { value: 'broccoli', label: '🥦  Broccoli' },
-  { value: 'carrot', label: '🥕 Carrot' },
-  { value: 'celery', label: '🥬 Celery' },
-  { value: 'cucumber', label: '🥒  Cucumber' },
-  { value: 'lettuce', label: '🥬 Lettuce' },
-  { value: 'mushroom', label: '🍄 Mushroom' },
-  { value: 'onion', label: '🧅 Onion' },
-  { value: 'tomato', label: '🍅 Tomato' }
-]
-
-const carbOptions = [
-  { value: 'rice', label: '🍚 Rice' },
-  { value: 'pasta', label: '🍝 Pasta' },
-  { value: 'bread', label: '🍞 Bread' },
-  { value: 'potato', label: '🥔 Potato' },
-  { value: 'corn', label: '🌽 Corn' }
-]
-
-export default function NewRecipe() {
+export default function NewRecipe({ proteinOptions, vegetableOptions, carbOptions }) {
 
   const [protein, setProtein] = useState([]);
   const [vegetable, setVegetable] = useState([]);
@@ -45,7 +14,7 @@ export default function NewRecipe() {
 
 
   const handleSubmit = () => {
-    if (recipeName.length && url.length) {
+    if (recipeName.length && url.length && (protein.length || vegetable.length || carb.length)) {
       const options = {
         recipeName: '',
         ingredients: [],
@@ -65,22 +34,35 @@ export default function NewRecipe() {
       }
       console.log('ingredient array looks like: ', options['ingredients'])
       options['recipeName'] = recipeName;
-      options['url'] = url;
-
-      axios.post('/lazydish', options)
-      .then((response) => alert('Recipe Added!'))
-      .catch((err) => console.log(err));
+      if (!isValidHttpUrl(url)) {
+        alert('please input a valid url that includes the http/https in front of www');
+      } else {
+        options['url'] = url;
+        axios.post('/lazydish', options)
+          .then((response) => alert('Recipe Added!'))
+          .catch((err) => console.log(err));
+      }
     } else {
       alert('Please input the dish name, url & at least one ingredient.')
     }
   }
 
+  function isValidHttpUrl(string) {
+    let url;
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
+
   return (
     <NewRecipeGrid>
       <NewRecipeTitle>
-      🍱 🍲🥘🥙🍛🍝
-      <br/>
-      Have a recipe you like? Input it below:
+        🍱 🍲🥘🥙🍛🍝
+        <br />
+        Have a recipe you like? Input it below:
       </NewRecipeTitle>
       <NewRecipeName>
         <label htmlFor="dishName">What's the name of the dish?</label>

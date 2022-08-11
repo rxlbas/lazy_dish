@@ -6,14 +6,14 @@ export const WholeGrid = styled.div`
   max-width: 100%;
   margin: 0 auto;
   grid-template-rows: auto auto;
-  gap: 2%;
+  gap: 4%;
 `
 export const PageTopGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
-  grid-template-rows: auto auto auto;
-  gap: 2%;
+  grid-template-rows: auto auto auto auto;
+  gap: 5%;
 `
 export const PageTitle = styled.h1`
   padding-top: 3%;
@@ -22,6 +22,8 @@ export const PageTitle = styled.h1`
 export const PageDescription = styled.h3`
   margin: 0 auto;
 `
+
+// below is not inuse right now
 export const PageButtonGrid = styled.div`
   display: grid;
   max-width: 100%;
@@ -33,7 +35,10 @@ export const PageButton = styled.button`
   max-width: 50%;
   margin: 0 auto;
 `
-
+export const RandomRecipeContainer = styled.div`
+  max-width: 80%;
+  margin: 0 auto;
+`
 
 export const Page1Grid = styled.div`
   display: grid;
@@ -62,6 +67,13 @@ export const SectionGrid = styled.div`
   display: grid;
   max-width: 100%;
   grid-template-rows: auto auto;
+`
+export const SmallSectionGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  grid-template-columns: auto auto auto;
+  overflow-x: scroll;
+  gap: 5%;
 `
 // orange
 // used by both IngredientSelect and NewRecipe
@@ -118,6 +130,7 @@ export const MatchingRecipe = styled.a`
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 1rem;
+  padding-right: 1rem;
   background-color: #F0F0F0;
   border: 1px solid black;
   cursor: pointer;
