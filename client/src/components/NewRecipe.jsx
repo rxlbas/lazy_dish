@@ -74,7 +74,7 @@ export default function NewRecipe({ proteinOptions, vegetableOptions, carbOption
   return (
     <NewRecipeGrid>
       <NewRecipeTitle>
-        🍱 🍲🥘🥙🍛🍝
+        🍱 🍲 🥘 🥙 🍛 🍝 🍣 🫔 🥗 🍮 🥟
         <br />
         Have a recipe you like? Input it below:
       </NewRecipeTitle>

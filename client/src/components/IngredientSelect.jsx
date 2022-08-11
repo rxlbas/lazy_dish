@@ -47,7 +47,7 @@ export default function IngredientSelect({ proteinOptions, vegetableOptions, car
         👩‍🍳 Please pick the ingredients you have~👨‍🍳
       </SectionTitle>
       <SectionGrid>
-        <SmallSectionTitle>Select proteins you have (optional)</SmallSectionTitle>
+        <SmallSectionTitle>Select proteins you have:</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -60,7 +60,7 @@ export default function IngredientSelect({ proteinOptions, vegetableOptions, car
         />
       </SectionGrid>
       <SectionGrid>
-        <SmallSectionTitle>Select vegetables you have (optional)</SmallSectionTitle>
+        <SmallSectionTitle>Select vegetables you have:</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -74,7 +74,7 @@ export default function IngredientSelect({ proteinOptions, vegetableOptions, car
       </SectionGrid>
 
       <SectionGrid>
-        <SmallSectionTitle>Select carbs you have (optional)</SmallSectionTitle>
+        <SmallSectionTitle>Select carbs you have:</SmallSectionTitle>
         <Select
           // defaultMenuIsOpen
           isMulti
@@ -88,12 +88,12 @@ export default function IngredientSelect({ proteinOptions, vegetableOptions, car
       </SectionGrid>
       <NewRecipeSubmit onClick={() => handleSubmit()}>Submit your ingredients~</NewRecipeSubmit>
       <SectionGrid>
-        <MediumSectionTitle>Matching recipes:</MediumSectionTitle>
+        <MediumSectionTitle>🍱 Matching recipes:</MediumSectionTitle>
         <SmallSectionGrid>
         {matchingRecipe.length > 0 ? matchingRecipe.map((recipe, index) => {
           // console.log('I am in map funciton', recipe);
           return <Tag key={recipe.url + index} recipe={recipe} />
-        }) : <div>I don't see any matching recipe yet, consider adding more ingredients you have or consider go on a grocery shopping trip? 🛒 </div>
+        }) : <div>👀 No matching recipe yet, consider adding more ingredients you have or maybe it's time to go on a grocery shopping trip 🛒 </div>
         }
         </SmallSectionGrid>
       </SectionGrid>

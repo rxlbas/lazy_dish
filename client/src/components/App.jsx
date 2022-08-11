@@ -3,7 +3,7 @@ import axios from 'axios';
 import IngredientSelect from './IngredientSelect.jsx';
 import NewRecipe from './NewRecipe.jsx';
 import Tag from './Tag.jsx';
-import { WholeGrid, PageTopGrid, PageTitle, PageDescription, PageButtonGrid, PageButton, RandomRecipeContainer, Page1Grid } from './page.styled.js'
+import { WholeGrid, HorizontalLine, PageTopGrid, PageTitle, PageDescription, PageButtonGrid, PageButton, RandomRecipeContainer, Page1Grid } from './page.styled.js'
 
 export default function APP() {
   const proteinOptions = [
@@ -67,7 +67,7 @@ export default function APP() {
     <WholeGrid>
       <PageTopGrid>
         <PageTitle>
-          🍱 🍲🥘 Lazy Dish 🥙🍛🍝
+          🍱 🍲 🥘 Lazy Dish 🥙 🍛 🍝
         </PageTitle>
         <PageDescription>
           Don't know what to eat today? Pick the ingredients you have and we will generate a list of dishes you can make 😋
@@ -78,11 +78,14 @@ export default function APP() {
           <PageButton>3</PageButton>
           <PageButton>4</PageButton>
         </PageButtonGrid> */}
-        <PageButton onClick={() => handleClick()}>Still can't decide? Click here 🍽️ </PageButton>
+        <PageButton onClick={() => handleClick()}>Still can't decide? Click here for a random recipe 🍽️ </PageButton>
         <RandomRecipeContainer>
           {Object.keys(randomRecipe).length > 0 ? <Tag recipe={randomRecipe} /> : null}
         </RandomRecipeContainer>
       </PageTopGrid>
+      {/* <HorizontalLine>
+        __________________________________________________________________________________________________________________________________________________________________________________________________________________
+      </HorizontalLine> */}
       <Page1Grid>
         {recipeArray.length > 0 && <IngredientSelect proteinOptions={proteinOptions} vegetableOptions={vegetableOptions} carbOptions={carbOptions} recipeArray={recipeArray} />}
         <NewRecipe proteinOptions={proteinOptions} vegetableOptions={vegetableOptions} carbOptions={carbOptions}/>
