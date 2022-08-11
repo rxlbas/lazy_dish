@@ -12,7 +12,6 @@ export default function NewRecipe({ proteinOptions, vegetableOptions, carbOption
   const [recipeName, setRecipeName] = useState('');
   const [url, setUrl] = useState('');
 
-
   const handleSubmit = () => {
     if (recipeName.length && url.length && (protein.length || vegetable.length || carb.length)) {
       const options = {
@@ -39,12 +38,27 @@ export default function NewRecipe({ proteinOptions, vegetableOptions, carbOption
       } else {
         options['url'] = url;
         axios.post('/lazydish', options)
-          .then((response) => alert('Recipe Added!'))
+          .then((response) => {
+            alert('Recipe Added!');
+            ClearFields();
+            setProtein([]);
+            setVegetable([]);
+            setCarb([]);
+          })
           .catch((err) => console.log(err));
+
+
       }
     } else {
       alert('Please input the dish name, url & at least one ingredient.')
     }
+
+  }
+
+  function ClearFields() {
+    document.getElementById("recipeName").value = "";
+    document.getElementById("dishName").value = "";
+
   }
 
   function isValidHttpUrl(string) {
@@ -69,7 +83,7 @@ export default function NewRecipe({ proteinOptions, vegetableOptions, carbOption
         <input id="recipeName" type="text" onChange={() => setRecipeName(event.target.value)} required />
       </NewRecipeName>
       <NewRecipeName>
-        <label htmlFor="dishName">What's the link to this recipe?</label>
+        <label htmlFor="dishName">What's the link to this recipe? (please include https in front)</label>
         <input id="dishName" type="text" onChange={() => setUrl(event.target.value)} required />
       </NewRecipeName>
       <SmallSectionTitle>Select at least one ingredient this recipe includes:</SmallSectionTitle>
@@ -81,6 +95,7 @@ export default function NewRecipe({ proteinOptions, vegetableOptions, carbOption
           options={proteinOptions}
           placeholder="Protein(s) in this recipe"
           onChange={setProtein}
+          value={protein}
           isSearchable
           autoFocus
         />
@@ -93,6 +108,7 @@ export default function NewRecipe({ proteinOptions, vegetableOptions, carbOption
           options={vegetableOptions}
           placeholder="Vegetable(s) in this recipe"
           onChange={setVegetable}
+          value={vegetable}
           isSearchable
           autoFocus
         />
@@ -107,6 +123,7 @@ export default function NewRecipe({ proteinOptions, vegetableOptions, carbOption
           options={carbOptions}
           placeholder="Carb(s) in this recipe"
           onChange={setCarb}
+          value={carb}
           isSearchable
           autoFocus
         />

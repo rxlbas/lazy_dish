@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import axios from 'axios';
-import { RecipeGrid, SectionTitle, SectionGrid, SmallSectionGrid, SmallSectionTitle, IngredientListGrid, TagLayout, NewRecipeSubmit } from './page.styled.js'
+import { RecipeGrid, SectionTitle, SectionGrid, SmallSectionGrid, MediumSectionTitle, SmallSectionTitle, IngredientListGrid, TagLayout, NewRecipeSubmit } from './page.styled.js'
 import Tag from './Tag.jsx';
 
 
@@ -28,26 +28,6 @@ export default function IngredientSelect({ proteinOptions, vegetableOptions, car
     for (let i = 0; i < carb.length; i++) {
       options.push(carb[i].value)
     }
-
-    // now I have an array options that contains all the client input ingredients
-
-    // axios.get('/lazydish')
-    //   .then((response) => {
-    //     // response.data looks like [{id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}, {id, ingredients, recipeName, url}]
-    //     const recipeArray = response.data;
-    //     console.log('recipeArray is: ', recipeArray)
-    //     const possibleRecipe = []
-    //     for (let i = 0; i < recipeArray.length; i++) {
-    //       // for each database recipe, check if all its ingredients are include in the client input array
-    //       // client ingredient options is the bigger array, we check recipe ingredients array in there
-    //       if(recipeArray[i].ingredients.every(r => options.indexOf(r) >= 0)) {
-    //         possibleRecipe.push(recipeArray[i]);
-    //       }
-    //     }
-    //     console.log('found matching recipe: ', possibleRecipe);
-    //     setMatchingRecipe(possibleRecipe);
-    //   })
-    //   .catch((err) => console.log(err));
 
     const possibleRecipe = []
     for (let i = 0; i < recipeArray.length; i++) {
@@ -108,8 +88,7 @@ export default function IngredientSelect({ proteinOptions, vegetableOptions, car
       </SectionGrid>
       <NewRecipeSubmit onClick={() => handleSubmit()}>Submit your ingredients~</NewRecipeSubmit>
       <SectionGrid>
-        <SmallSectionTitle>Matching recipes:</SmallSectionTitle>
-        <br/>
+        <MediumSectionTitle>Matching recipes:</MediumSectionTitle>
         <SmallSectionGrid>
         {matchingRecipe.length > 0 ? matchingRecipe.map((recipe, index) => {
           // console.log('I am in map funciton', recipe);

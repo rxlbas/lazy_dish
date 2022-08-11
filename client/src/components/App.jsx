@@ -14,7 +14,8 @@ export default function APP() {
     { value: 'lamb', label: '🐑 Lamb' },
     { value: 'salmon', label: '🐟 Salmon' },
     { value: 'tofu', label: '🧈 Tofu' },
-    { value: 'cheese', label: '🧀 Cheese' }
+    { value: 'cheese', label: '🧀 Cheese' },
+    { value: 'Bacon', label: '🥓 Bacon' }
   ];
 
   const vegetableOptions = [
@@ -77,7 +78,7 @@ export default function APP() {
           <PageButton>3</PageButton>
           <PageButton>4</PageButton>
         </PageButtonGrid> */}
-        <PageButton onClick={() => handleClick()}>Can't choose? Click here 🍽️ </PageButton>
+        <PageButton onClick={() => handleClick()}>Still can't decide? Click here 🍽️ </PageButton>
         <RandomRecipeContainer>
           {Object.keys(randomRecipe).length > 0 ? <Tag recipe={randomRecipe} /> : null}
         </RandomRecipeContainer>
